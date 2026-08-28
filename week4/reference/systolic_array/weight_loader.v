@@ -46,12 +46,27 @@ module weight_loader #(
     end
 
 `ifndef SYNTHESIS
-`ifndef NO_VCD_DUMP
-    initial begin
-        $dumpfile("dump.vcd");
-        $dumpvars(0, weight_loader);
-    end
+
+`ifdef DUMP_WEIGHT_LOADER
+
+initial begin
+    $dumpfile("weight_loader.vcd");
+    $dumpvars(0, weight_loader);
+end
+
+`elsif NO_VCD_DUMP
+
+// 아무것도 안 함
+
+`else
+
+initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, weight_loader);
+end
+
 `endif
+
 `endif
 
 endmodule

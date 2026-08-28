@@ -40,13 +40,20 @@ class SystolicArray:
     def step(self, left_inputs: np.ndarray) -> np.ndarray:
         ps_out = self.pe_ps_in + self.pe_input * self.weights
         bottom = ps_out[-1].copy()
+        print(f"ps_out = ", ps_out)
+        print(f"bottom = ", bottom)
 
         new_pe_input = np.zeros_like(self.pe_input)
+        print(f"좌측에서 우측 이동 전 new_pe_input = ", new_pe_input)
         new_pe_input[:, 1:] = self.pe_input[:, :-1]
+        print(f"좌측에서 우측 이동 후 new_pe_input = ", new_pe_input)
         new_pe_input[:, 0] = left_inputs
+        print(f"새로운 입력 배치 이후 new_pe_input = ", new_pe_input)
 
         new_pe_ps_in = np.zeros_like(self.pe_ps_in)
+        print(f"부분합 위에서 아래로 이동 전 = ", new_pe_ps_in)
         new_pe_ps_in[1:] = ps_out[:-1]
+        print(f"부분합 위에서 아래로 이동 후 = ", new_pe_ps_in)
 
         self.pe_input = new_pe_input
         self.pe_ps_in = new_pe_ps_in

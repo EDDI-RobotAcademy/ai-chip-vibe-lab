@@ -77,19 +77,27 @@ module pe_array #(
     endgenerate
 
 `ifndef SYNTHESIS
+
 `ifdef DUMP_PE_ARRAY
-    initial begin
-        $dumpfile("dump.vcd");
-        $dumpvars(0, pe_array);
-    end
+
+initial begin
+    $dumpfile("pe_array.vcd");
+    $dumpvars(0, pe_array);
+end
+
 `else
+
 `ifndef NO_VCD_DUMP
-    initial begin
-        $dumpfile("dump.vcd");
-        $dumpvars(0, pe_array);
-    end
+
+initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, pe_array);
+end
+
 `endif
+
 `endif
+
 `endif
 
 endmodule

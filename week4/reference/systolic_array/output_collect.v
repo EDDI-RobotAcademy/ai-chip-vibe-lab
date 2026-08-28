@@ -32,12 +32,27 @@ module output_collect #(
     end
 
 `ifndef SYNTHESIS
-`ifndef NO_VCD_DUMP
-    initial begin
-        $dumpfile("dump.vcd");
-        $dumpvars(0, output_collect);
-    end
+
+`ifdef DUMP_OUTPUT_COLLECT
+
+initial begin
+    $dumpfile("output_collect.vcd");
+    $dumpvars(0, output_collect);
+end
+
+`elsif NO_VCD_DUMP
+
+// dump 없음
+
+`else
+
+initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, output_collect);
+end
+
 `endif
+
 `endif
 
 endmodule

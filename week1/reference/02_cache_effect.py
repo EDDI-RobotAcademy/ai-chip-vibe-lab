@@ -17,6 +17,7 @@ def pointer_chase(sizes_kb: list[int], steps_per_size: int = 200_000) -> tuple[l
         i = 0
         for _ in range(min(1000, n)):
             i = int(perm[i])
+            print(f"i = {i}, perm[i] = {perm[i]}")
 
         t0 = time.perf_counter()
         i = 0
