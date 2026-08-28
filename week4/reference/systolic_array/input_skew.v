@@ -53,12 +53,27 @@ module input_skew #(
     endgenerate
 
 `ifndef SYNTHESIS
+
+`ifdef DUMP_INPUT_SKEW
+
+initial begin
+    $dumpfile("input_skew.vcd");
+    $dumpvars(0, input_skew);
+end
+
+`else
+
 `ifndef NO_VCD_DUMP
-    initial begin
-        $dumpfile("dump.vcd");
-        $dumpvars(0, input_skew);
-    end
+
+initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, input_skew);
+end
+
 `endif
+
+`endif
+
 `endif
 
 endmodule
